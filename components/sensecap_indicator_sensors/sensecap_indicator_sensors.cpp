@@ -69,9 +69,8 @@ void SenseCapIndicatorSensorComponent::loop() {
     }
   }
 }
-void SenseCapIndicatorSensorComponent::on_shutdown()
-{
-  uint8_t payload = { PKT_TYPE_CMD_SHUTDOWN };
+void SenseCapIndicatorSensorComponent::on_shutdown() {
+  uint8_t payload = {PKT_TYPE_CMD_SHUTDOWN};
   this->send(payload, sizeof(payload));
 }
 
@@ -86,60 +85,48 @@ void SenseCapIndicatorSensorComponent::setup() {
 void SenseCapIndicatorSensorComponent::on_packet_received(const uint8_t *buffer, size_t size) {
   float dataval;
   switch (buffer[0]) {
-  case PKT_TYPE_SENSOR_SCD41_CO2: {
+  case PKT_TYPE_SENSOR_SCD41_CO2:
     memcpy(&dataval, &buffer[1], sizeof(float));
     ESP_LOGD(TAG, "CO2 Level: %.4f", dataval);
-    if (this->co2_sensor_ != nullptr)
-    {
+    if (this->co2_sensor_ != nullptr) {
       this->co2_sensor_->publish_state(dataval);
     }
     break;
-  }
-  case PKT_TYPE_SENSOR_SHT41_TEMP: {
+  case PKT_TYPE_SENSOR_SHT41_TEMP:
     memcpy(&dataval, &buffer[1], sizeof(float));
     ESP_LOGD(TAG, "Temperature: %.2f", dataval);
-    if (this->temperature_sensor_ != nullptr)
-    {
+    if (this->temperature_sensor_ != nullptr) {
       this->temperature_sensor_->publish_state(dataval);
     }
     break;
-  }
-  case PKT_TYPE_SENSOR_SHT41_HUMIDITY: {
+  case PKT_TYPE_SENSOR_SHT41_HUMIDITY:
     memcpy(&dataval, &buffer[1], sizeof(float));
     ESP_LOGD(TAG, "Humidity: %.2f", dataval);
-    if (this->humidity_sensor_ != nullptr)
-    {
+    if (this->humidity_sensor_ != nullptr) {
       this->humidity_sensor_->publish_state(dataval);
     }
     break;
-  }
-  case PKT_TYPE_SENSOR_TVOC_INDEX: {
+  case PKT_TYPE_SENSOR_TVOC_INDEX:
     memcpy(&dataval, &buffer[1], sizeof(float));
     ESP_LOGD(TAG, "TVOC INDEX: %.4f", dataval);
-    if (this->tvoc_sensor_ != nullptr)
-    {
+    if (this->tvoc_sensor_ != nullptr) {
       this->tvoc_sensor_->publish_state(dataval);
     }
     break;
-  }
-  case PKT_TYPE_SENSOR_SCD41_TEMP: {
+  case PKT_TYPE_SENSOR_SCD41_TEMP:
     memcpy(&dataval, &buffer[1], sizeof(float));
     ESP_LOGD(TAG, "Internal Temperature: %.2f", dataval);
-    if (this->internal_temperature_sensor_ != nullptr)
-    {
+    if (this->internal_temperature_sensor_ != nullptr) {
       this->internal_temperature_sensor_->publish_state(dataval);
     }
     break;
-  }
-  case PKT_TYPE_SENSOR_SCD41_HUMIDITY: {
+  case PKT_TYPE_SENSOR_SCD41_HUMIDITY:
     memcpy(&dataval, &buffer[1], sizeof(float));
     ESP_LOGD(TAG, "Internal Humidity: %.2f", dataval);
-    if (this->internal_humidity_sensor_ != nullptr)
-    {
+    if (this->internal_humidity_sensor_ != nullptr) {
       this->internal_humidity_sensor_->publish_state(dataval);
     }
     break;
-  }
   default:
     break;
   }
