@@ -70,8 +70,6 @@ void SenseCapIndicatorSensorComponent::loop() {
   }
 }
 void SenseCapIndicatorSensorComponent::on_shutdown() {
-  uint8_t payload = {PKT_TYPE_CMD_SHUTDOWN};
-  this->send(payload, sizeof(payload));
 }
 
 void SenseCapIndicatorSensorComponent::setup() {
