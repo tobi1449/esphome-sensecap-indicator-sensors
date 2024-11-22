@@ -19,7 +19,7 @@
 #define PKT_TYPE_SENSOR_SCD41_HUMIDITY 0XB7
 
 #define PKT_TYPE_CMD_SHUTDOWN 0xA3
-#define PKT_TYPE_CMD_ALTITUDE 0xA0
+#define PKT_TYPE_CMD_ALTITUDE 0xA4
 
 namespace esphome {
 namespace sensecap_indicator_sensors {
