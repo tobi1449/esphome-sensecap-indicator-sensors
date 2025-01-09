@@ -6,6 +6,11 @@ When the SenseCap Indicator's RP2040 is flashed with [tobi1449/sensecap-indicato
 
 ## Usage
 ```
+uart:
+  tx_pin: 19
+  rx_pin: 20
+  baud_rate: 115200
+
 sensor:
   - platform: sensecap_indicator_sensors
     co2:
